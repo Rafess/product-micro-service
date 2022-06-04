@@ -1,0 +1,39 @@
+version: "3.9"
+services:
+  product-app:
+    image: product-app
+    networks:
+      - shopping-nw
+    ports:
+      - "8080:8080"
+    depends_on:
+      - product-db
+  product-db:
+    image: postgres
+    networks:
+      - shopping-nw
+    environment:
+      - POSTGRES_PASSWORD=postegres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=product-db
+    ports:
+      - "5432:5432"
+#  user-app:
+#    image: letscode/spring-boot-user-app
+#    networks:
+#      - shopping-nw
+#    ports:
+#      - "8081:8081"
+#    depends_on:
+#      - product-db
+#  sales-app:
+#    image: letscode/spring-boot-sales-app
+#    networks:
+#      - shopping-nw
+#    ports:
+#      - "8082:8082"
+#    depends_on:
+#      - product-db
+networks:
+  shopping-nw:
+    driver: bridge

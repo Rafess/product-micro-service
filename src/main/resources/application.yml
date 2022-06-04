@@ -1,0 +1,34 @@
+spring:
+  application:
+    name: product-app
+  datasource:
+    url: jdbc:postgresql://localhost5432/db
+    username: postgres
+    password: postgres
+  jpa:
+    database-platform:
+      org.hibernate.dialect.PostgresSQLDialect
+    show-sql: false
+    hibernate:
+      ddl-auto: update
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
+    metrics:
+      enabled:  false
+    prometheus:
+      enabled: true
+  info:
+    env:
+      enabled: true
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+    tags:
+      application=${spring:application:name}:
